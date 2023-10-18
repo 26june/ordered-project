@@ -14,8 +14,6 @@ const numbersData = {
       generatedNumbersIds: [],
     },
   },
-  // Facilitate reordering of the columns
-  columnOrder: ["genArea, dropArea"],
 };
 
 export default numbersData;
