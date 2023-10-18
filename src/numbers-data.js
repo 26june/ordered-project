@@ -1,13 +1,8 @@
 const numbersData = {
-  currentNumber: {
-    id: 1,
-    content: 1,
-  },
-
   generatedNumbers: {
     2: { id: 2, content: 2 },
   },
-  droppableAreas: {
+  columns: {
     genArea: {
       id: "genArea",
       generatedNumbersIds: [1],
