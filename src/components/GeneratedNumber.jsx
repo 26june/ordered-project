@@ -1,0 +1,24 @@
+import React from "react";
+import { Draggable } from "react-beautiful-dnd";
+import { styled } from "styled-components";
+
+const Container = styled.div`
+  height: 100%;
+  width: 100%;
+
+  background-color: lightgreen;
+`;
+
+export default function GeneratedNumber({ numberId, index }) {
+  return (
+    <Draggable draggableId={numberId} index={index}>
+      {(provided, snapshot) => (
+        <Container
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        ></Container>
+      )}
+    </Draggable>
+  );
+}

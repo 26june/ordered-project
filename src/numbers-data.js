@@ -1,14 +1,14 @@
 const numbersData = {
   generatedNumbers: {
-    2: { id: 2, content: 2 },
+    1: { id: "1", content: 1 },
   },
-  columns: {
-    genArea: {
-      id: "genArea",
-      generatedNumbersIds: [1],
+  myDroppableAreas: {
+    numGenArea: {
+      id: "numGenArea",
+      generatedNumbersIds: ["1"],
     },
-    dropArea: {
-      id: "dropArea",
+    listDropArea: {
+      id: "listDropArea",
       generatedNumbersIds: [0, 0, 0, 0, 0],
     },
   },

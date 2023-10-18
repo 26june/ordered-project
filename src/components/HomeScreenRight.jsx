@@ -7,6 +7,13 @@ const RightContainer = styled.div`
   background-color: lightblue;
 `;
 
+const DroppableContainer = styled.div`
+  height: 10%;
+  width: 30%;
+
+  background-color: lightpink;
+`;
+
 export default function HomeScreenRight() {
   return <RightContainer></RightContainer>;
 }
