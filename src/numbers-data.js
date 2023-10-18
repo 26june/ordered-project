@@ -1,6 +1,7 @@
 const numbersData = {
   generatedNumbers: {
-    1: { id: "1", content: 1 },
+    0: { id: "0", content: "" },
+    1: { id: "1", content: "1" },
   },
   myDroppableAreas: {
     numGenArea: {
@@ -9,7 +10,7 @@ const numbersData = {
     },
     listDropArea: {
       id: "listDropArea",
-      generatedNumbersIds: [0, 0, 0, 0, 0],
+      generatedNumbersIds: ["0", "0", "0", "0", "0"],
     },
   },
 };

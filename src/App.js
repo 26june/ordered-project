@@ -23,8 +23,48 @@ function App() {
     myDroppableAreas: { numGenArea, listDropArea },
   } = initState;
 
-  function handleOnDragEnd() {
-    console.log("Hello Drag Over");
+  function handleOnDragEnd(result) {
+    const { destination, source, draggableId } = result;
+
+    if (!destination) {
+      return;
+    }
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    const dragEndAreaStart = initState.myDroppableAreas[source.droppableId];
+    const dragEndAreaEnd = initState.myDroppableAreas.listDropArea;
+
+    const startNumIdsArray = Array.from(dragEndAreaStart.generatedNumbersIds);
+    startNumIdsArray.splice(source.index, 1);
+
+    const endNumIdsArray = Array.from(dragEndAreaEnd.generatedNumbersIds);
+    endNumIdsArray.splice(+destination.droppableId, 1, draggableId);
+
+    const newNumgenArea = {
+      ...dragEndAreaStart,
+      generatedNumbersIds: startNumIdsArray,
+    };
+
+    const newListDropArea = {
+      ...dragEndAreaEnd,
+      generatedNumbersIds: endNumIdsArray,
+    };
+
+    const newState = {
+      ...initState,
+      myDroppableAreas: {
+        ...initState.myDroppableAreas,
+        [newNumgenArea.id]: newNumgenArea,
+        [newListDropArea.id]: newListDropArea,
+      },
+    };
+
+    setInitState(newState);
   }
 
   return (
@@ -34,6 +74,7 @@ function App() {
           key={numGenArea.id}
           generatedNumbers={generatedNumbers}
           numGenArea={numGenArea}
+          setInitState={setInitState}
         ></HomeScreenLeft>
         <HomeScreenRight
           key={listDropArea.id}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { styled } from "styled-components";
 import GeneratedNumber from "./GeneratedNumber";
@@ -9,8 +9,10 @@ const LeftContainer = styled.div`
   background-color: lightyellow;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 16px;
 `;
 
 const DroppableContainer = styled.div`
@@ -20,7 +22,45 @@ const DroppableContainer = styled.div`
   background-color: lightpink;
 `;
 
-export default function HomeScreenLeft({ generatedNumbers, numGenArea }) {
+const RandomNumberButton = styled.div`
+  height: 10%;
+  width: 30%;
+
+  background-color: red;
+`;
+
+export default function HomeScreenLeft({
+  generatedNumbers,
+  numGenArea,
+  setInitState,
+}) {
+  const newNum = 2;
+
+  function handleGenerateRandomNumber(e) {
+    setInitState((current) => {
+      const newGeneratedNumbers = {
+        ...current.generatedNumbers,
+        [newNum]: { id: `${newNum}`, content: `${newNum}` },
+      };
+
+      const newNumgenArea = {
+        ...current.myDroppableAreas.numGenArea,
+        generatedNumbersIds: [`${newNum}`],
+      };
+
+      const newDroppableArea = {
+        ...current.myDroppableAreas,
+        numGenArea: newNumgenArea,
+      };
+
+      return {
+        ...current,
+        generatedNumbers: newGeneratedNumbers,
+        myDroppableAreas: newDroppableArea,
+      };
+    });
+  }
+
   return (
     <LeftContainer>
       <Droppable droppableId={numGenArea.id}>
@@ -35,6 +75,7 @@ export default function HomeScreenLeft({ generatedNumbers, numGenArea }) {
                   key={numberId}
                   numberId={numberId}
                   index={index}
+                  content={generatedNumbers[numberId].content}
                 ></GeneratedNumber>
               );
             })}
@@ -43,6 +84,10 @@ export default function HomeScreenLeft({ generatedNumbers, numGenArea }) {
           </DroppableContainer>
         )}
       </Droppable>
+
+      <RandomNumberButton
+        onClick={handleGenerateRandomNumber}
+      ></RandomNumberButton>
     </LeftContainer>
   );
 }

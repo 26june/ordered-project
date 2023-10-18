@@ -9,7 +9,7 @@ const Container = styled.div`
   background-color: lightgreen;
 `;
 
-export default function GeneratedNumber({ numberId, index }) {
+export default function GeneratedNumber({ numberId, index, content }) {
   return (
     <Draggable draggableId={numberId} index={index}>
       {(provided, snapshot) => (
@@ -17,7 +17,9 @@ export default function GeneratedNumber({ numberId, index }) {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-        ></Container>
+        >
+          {content}
+        </Container>
       )}
     </Draggable>
   );
