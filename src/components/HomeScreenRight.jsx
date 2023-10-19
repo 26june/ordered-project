@@ -29,7 +29,13 @@ export default function HomeScreenRight({ generatedNumbers, listDropArea }) {
     <RightContainer>
       {listDropArea.generatedNumbersIds.map((numberId, index) => {
         return (
-          <Droppable droppableId={index.toString()} key={index}>
+          <Droppable
+            droppableId={index.toString()}
+            key={index}
+            isDropDisabled={
+              generatedNumbers[numberId].content === "" ? false : true
+            }
+          >
             {(provided, snapshot) => (
               <DroppableContainer
                 ref={provided.innerRef}
