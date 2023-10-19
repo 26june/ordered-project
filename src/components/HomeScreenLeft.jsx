@@ -34,11 +34,13 @@ export default function HomeScreenLeft({
   numGenArea,
   setInitState,
 }) {
-
-  
   let newNum = Math.floor(Math.random() * 99 + 1);
 
   function handleGenerateRandomNumber(e) {
+    while (generatedNumbers.hasOwnProperty(newNum)) {
+      newNum = Math.floor(Math.random() * 99 + 1);
+    }
+
     setInitState((current) => {
       const newGeneratedNumbers = {
         ...current.generatedNumbers,
