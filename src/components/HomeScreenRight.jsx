@@ -18,8 +18,10 @@ const DroppableContainer = styled.div`
   height: 10%;
   width: 30%;
 
+  transition: background-color 1s ease;
+  font-size: 3rem;
   background-color: ${({ $isDraggingOver }) =>
-    $isDraggingOver ? "lightblue" : "white"};
+    $isDraggingOver ? "lightpink" : "white"};
 `;
 
 export default function HomeScreenRight({ generatedNumbers, listDropArea }) {
