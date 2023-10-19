@@ -16,15 +16,15 @@ const LeftContainer = styled.div`
 `;
 
 const DroppableContainer = styled.div`
-  height: 10%;
-  width: 30%;
+  height: 10vh;
+  width: 20vw;
 
   background-color: lightpink;
 `;
 
 const RandomNumberButton = styled.div`
-  height: 10%;
-  width: 30%;
+  height: 10vh;
+  width: 20vw;
 
   background-color: red;
 `;

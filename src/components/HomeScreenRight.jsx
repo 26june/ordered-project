@@ -15,8 +15,8 @@ const RightContainer = styled.div`
 `;
 
 const DroppableContainer = styled.div`
-  height: 10%;
-  width: 30%;
+  height: 10vh;
+  width: 20vw;
 
   transition: background-color 1s ease;
   font-size: 3rem;
