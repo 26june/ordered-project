@@ -23,8 +23,6 @@ const LeftContainer = styled.div`
 const DroppableContainer = styled.div`
   height: 10vh;
   width: 20vw;
-
-  border: 1px solid black;
 `;
 
 const RandomNumberButton = styled.div`
@@ -145,7 +143,11 @@ export default function HomeScreenLeft({
               : null
           }
         >
-          {gameLost ? "Restart" : "Generate"}
+          {gameLost
+            ? "Restart"
+            : numGenArea.generatedNumbersIds.length === 0
+            ? "Generate"
+            : ""}
         </RandomNumberButton>
       </LeftContainer>
     </>
