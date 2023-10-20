@@ -136,7 +136,13 @@ export default function HomeScreenLeft({
         </Droppable>
 
         <RandomNumberButton
-          onClick={gameLost ? handleRestart : handleGenerateRandomNumber}
+          onClick={
+            gameLost
+              ? handleRestart
+              : numGenArea.generatedNumbersIds.length === 0
+              ? handleGenerateRandomNumber
+              : null
+          }
         >
           {gameLost ? "Restart" : "Generate"}
         </RandomNumberButton>
