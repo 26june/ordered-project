@@ -74,6 +74,7 @@ function App() {
           key={numGenArea.id}
           generatedNumbers={generatedNumbers}
           numGenArea={numGenArea}
+          listDropArea={listDropArea}
           setInitState={setInitState}
         ></HomeScreenLeft>
         <HomeScreenRight

@@ -12,14 +12,24 @@ const RightContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 16px;
+
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const DroppableContainer = styled.div`
   height: 10vh;
   width: 20vw;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   transition: background-color 1s ease;
-  font-size: 3rem;
+  font-size: 2rem;
   background-color: ${({ $isDraggingOver }) =>
     $isDraggingOver ? "lightpink" : "white"};
 `;
