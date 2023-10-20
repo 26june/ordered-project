@@ -1,4 +1,5 @@
-import React from "react";
+import anime from "animejs";
+import React, { useEffect } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { styled } from "styled-components";
 
@@ -18,6 +19,17 @@ export default function GeneratedNumber({
   content,
   gameLost,
 }) {
+  useEffect(() => {
+    let animation = anime({
+      targets: "#myGeneratedNumber",
+      opacity: [0, 1],
+      duration: 2000,
+
+      complete: function (anim) {
+        animation.remove("#myGeneratedNumber");
+      },
+    });
+  }, []);
   return (
     <Draggable draggableId={numberId} index={index} isDragDisabled={gameLost}>
       {(provided, snapshot) => (
@@ -25,6 +37,7 @@ export default function GeneratedNumber({
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          id="myGeneratedNumber"
         >
           {content}
         </Container>
