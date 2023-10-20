@@ -15,12 +15,19 @@ const Container = styled.div`
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 `;
 
+function checkSorted(arr) {
+  return arr.every(
+    (value, index, array) => index === 0 || value >= array[index - 1]
+  );
+}
+
 function App() {
   const [initState, setInitState] = useState(numbersData);
 
   const {
     generatedNumbers,
     myDroppableAreas: { numGenArea, listDropArea },
+    currentNum,
   } = initState;
 
   function handleOnDragEnd(result) {
@@ -62,6 +69,7 @@ function App() {
         [newNumgenArea.id]: newNumgenArea,
         [newListDropArea.id]: newListDropArea,
       },
+      currentNum: 0,
     };
 
     setInitState(newState);
@@ -76,11 +84,15 @@ function App() {
           numGenArea={numGenArea}
           listDropArea={listDropArea}
           setInitState={setInitState}
+          currentNum={currentNum}
+          checkSorted={checkSorted}
         ></HomeScreenLeft>
         <HomeScreenRight
           key={listDropArea.id}
           generatedNumbers={generatedNumbers}
           listDropArea={listDropArea}
+          currentNum={currentNum}
+          checkSorted={checkSorted}
         ></HomeScreenRight>
       </Container>
     </DragDropContext>

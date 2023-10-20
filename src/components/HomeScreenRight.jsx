@@ -34,7 +34,32 @@ const DroppableContainer = styled.div`
     $isDraggingOver ? "lightpink" : "white"};
 `;
 
-export default function HomeScreenRight({ generatedNumbers, listDropArea }) {
+export default function HomeScreenRight({
+  generatedNumbers,
+  listDropArea,
+  currentNum,
+}) {
+  function checkSortedRight(arr) {
+    return arr.every(
+      (value, index, array) => index === 0 || value >= array[index - 1]
+    );
+  }
+
+  let possibilityArrayRight = [];
+
+  listDropArea.generatedNumbersIds.forEach((currentId, index) => {
+    if (currentId !== "0") {
+      possibilityArrayRight[index] = false;
+      return;
+    }
+
+    const newIdArray = [...listDropArea.generatedNumbersIds];
+    newIdArray[index] = `${currentNum}`;
+    const newFilteredIdArray = newIdArray.filter((e) => e !== "0");
+    const parsedFilteredArray = newFilteredIdArray.map((e) => +e);
+    possibilityArrayRight[index] = checkSortedRight(parsedFilteredArray);
+  });
+
   return (
     <RightContainer>
       {listDropArea.generatedNumbersIds.map((numberId, index) => {
@@ -42,9 +67,7 @@ export default function HomeScreenRight({ generatedNumbers, listDropArea }) {
           <Droppable
             droppableId={index.toString()}
             key={index}
-            isDropDisabled={
-              generatedNumbers[numberId].content === "" ? false : true
-            }
+            isDropDisabled={!possibilityArrayRight[index]}
           >
             {(provided, snapshot) => (
               <DroppableContainer

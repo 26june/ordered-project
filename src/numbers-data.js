@@ -12,6 +12,8 @@ const numbersData = {
       generatedNumbersIds: Array.from("0".repeat(10)),
     },
   },
+
+  currentNum: 0,
 };
 
 export default numbersData;

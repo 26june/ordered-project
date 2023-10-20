@@ -36,16 +36,10 @@ const RandomNumberButton = styled.div`
 
   font-size: 2rem;
   border: 1px solid red;
-`;
 
-function checkSorted(arr) {
-  for (let i = 0; i < arr.length - 1; i++) {
-    if (arr[i] > arr[i + 1]) {
-      return false;
-    }
-  }
-  return true;
-}
+  cursor: ${({ $pointerLogic }) =>
+    $pointerLogic ? "pointer" : gameLost ? "pointer" : "not-allowed"};
+`;
 
 export default function HomeScreenLeft({
   generatedNumbers,
@@ -53,19 +47,24 @@ export default function HomeScreenLeft({
   listDropArea,
   setInitState,
 }) {
+  function checkSortedLeft(arr) {
+    return arr.every(
+      (value, index, array) => index === 0 || value >= array[index - 1]
+    );
+  }
+
   function handleRestart() {
     gameLost = false;
     setInitState(numbersData);
   }
 
-  let newNum = Math.floor(Math.random() * 99 + 1);
+  let possibilityArrayLeft = [];
 
   function handleGenerateRandomNumber(e) {
+    let newNum = Math.floor(Math.random() * 99 + 1);
     while (generatedNumbers.hasOwnProperty(newNum)) {
       newNum = Math.floor(Math.random() * 99 + 1);
     }
-
-    let possibilityArray = [];
 
     listDropArea.generatedNumbersIds.forEach((currentId, index) => {
       if (currentId !== "0") {
@@ -76,11 +75,11 @@ export default function HomeScreenLeft({
       newIdArray[index] = `${newNum}`;
 
       const newFilteredIdArray = newIdArray.filter((e) => e !== "0");
-
-      possibilityArray[index] = checkSorted(newFilteredIdArray);
+      const parsedFilteredArray = newFilteredIdArray.map((e) => +e);
+      possibilityArrayLeft[index] = checkSortedLeft(parsedFilteredArray);
     });
 
-    if (possibilityArray.indexOf(true) === -1) {
+    if (!possibilityArrayLeft.includes(true)) {
       gameLost = true;
     }
 
@@ -104,6 +103,7 @@ export default function HomeScreenLeft({
         ...current,
         generatedNumbers: newGeneratedNumbers,
         myDroppableAreas: newDroppableArea,
+        currentNum: newNum,
       };
     });
   }
@@ -136,6 +136,7 @@ export default function HomeScreenLeft({
         </Droppable>
 
         <RandomNumberButton
+          $pointerLogic={numGenArea.generatedNumbersIds.length === 0}
           onClick={
             gameLost
               ? handleRestart
