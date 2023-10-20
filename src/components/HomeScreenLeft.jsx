@@ -4,8 +4,10 @@ import { styled } from "styled-components";
 import numbersData from "../numbers-data";
 import GeneratedNumber from "./GeneratedNumber";
 import LoseCard from "./LoseCard";
+import WinCard from "./WinCard";
 
 let gameLost = false;
+let gameWin = false;
 
 const LeftContainer = styled.div`
   grid-column: 1/4;
@@ -45,6 +47,10 @@ export default function HomeScreenLeft({
   listDropArea,
   setInitState,
 }) {
+  listDropArea.generatedNumbersIds.includes("0")
+    ? (gameWin = false)
+    : (gameWin = true);
+
   function checkSortedLeft(arr) {
     return arr.every(
       (value, index, array) => index === 0 || value >= array[index - 1]
@@ -109,6 +115,8 @@ export default function HomeScreenLeft({
   return (
     <>
       {gameLost ? <LoseCard></LoseCard> : null}
+      {gameWin ? <WinCard></WinCard> : null}
+
       <LeftContainer>
         <Droppable droppableId={numGenArea.id}>
           {(provided, snapshot) => (
@@ -138,15 +146,17 @@ export default function HomeScreenLeft({
           onClick={
             gameLost
               ? handleRestart
-              : numGenArea.generatedNumbersIds.length === 0
+              : numGenArea.generatedNumbersIds.length === 0 && !gameWin
               ? handleGenerateRandomNumber
-              : null
+              : handleRestart
           }
         >
           {gameLost
             ? "Restart"
-            : numGenArea.generatedNumbersIds.length === 0
+            : numGenArea.generatedNumbersIds.length === 0 && !gameWin
             ? "Generate"
+            : gameWin
+            ? "Restart"
             : ""}
         </RandomNumberButton>
       </LeftContainer>
