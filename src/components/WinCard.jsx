@@ -15,5 +15,5 @@ const Container = styled.div`
 `;
 
 export default function WinCard() {
-  return <Container>WinCard</Container>;
+  return <Container>You Win!</Container>;
 }

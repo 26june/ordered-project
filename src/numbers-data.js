@@ -9,7 +9,7 @@ const numbersData = {
     },
     listDropArea: {
       id: "listDropArea",
-      generatedNumbersIds: Array.from("0".repeat(2)),
+      generatedNumbersIds: Array.from("0".repeat(10)),
     },
   },
 

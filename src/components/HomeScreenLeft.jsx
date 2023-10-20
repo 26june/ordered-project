@@ -13,7 +13,8 @@ const LeftContainer = styled.div`
   grid-column: 1/4;
   grid-row: 1/6;
   transition: background-color 1s ease;
-  background-color: ${() => (gameLost ? "#ff6961" : "#77dd77")};
+  background-color: ${() =>
+    gameLost ? "#ff6961" : gameWin ? "#77dd77" : "#fdfd96"};
 
   display: flex;
   flex-direction: column;
@@ -35,7 +36,11 @@ const RandomNumberButton = styled.div`
   align-items: center;
 
   font-size: 2rem;
-  border: 1px solid red;
+
+  transition: border 1s ease;
+
+  border: ${({ children }) =>
+    children === "" ? "1px solid transparent" : "1px solid red"};
 
   cursor: ${({ $pointerLogic }) =>
     $pointerLogic ? "pointer" : gameLost ? "pointer" : "not-allowed"};
@@ -144,11 +149,11 @@ export default function HomeScreenLeft({
         <RandomNumberButton
           $pointerLogic={numGenArea.generatedNumbersIds.length === 0}
           onClick={
-            gameLost
+            gameLost || gameWin
               ? handleRestart
-              : numGenArea.generatedNumbersIds.length === 0 && !gameWin
+              : numGenArea.generatedNumbersIds.length === 0
               ? handleGenerateRandomNumber
-              : handleRestart
+              : null
           }
         >
           {gameLost

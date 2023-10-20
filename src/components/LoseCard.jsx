@@ -15,5 +15,5 @@ const Container = styled.div`
 `;
 
 export default function LoseCard() {
-  return <Container>LoseCard</Container>;
+  return <Container>You Lose!</Container>;
 }
